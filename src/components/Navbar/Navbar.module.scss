@@ -1,0 +1,77 @@
+.NavbarContainer {
+  background: white;
+  border-bottom: 1px solid #f7f7f7;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "links" "logo" "profile";
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+    padding: 0.5rem;
+    grid-column-start: 2;
+  }
+
+  nav {
+    grid-area: links;
+    ul {
+      list-style: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      font-family: "Rubik", sans-serif;
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      margin-left: 1rem;
+
+      li {
+        color: #555865;
+        margin-right: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+
+        span {
+          margin-right: 0.5rem;
+          font-size: 1.5rem;
+        }
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .Profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .Button {
+      padding: 0.6rem 1rem;
+      width: 6rem;
+      margin: 0 1rem;
+      background: #2ba5f7;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 0.85rem;
+      font-family: "Rubik", sans-serif;
+      letter-spacing: 1px;
+  
+      &:hover {
+        background: #349ade;
+        transition: 0.2s;
+      }
+    }
+  }
+
+}

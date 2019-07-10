@@ -1,0 +1,66 @@
+.ProfileContainer {
+  background: white;
+  text-align: center;
+  color: #14171a;
+  padding: 3rem 1.5rem;
+  margin: 1rem;
+
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    &:hover {
+      opacity: 0.75;
+      transition: ease-in-out 0.1s;
+      cursor: grab;
+    }
+  }
+
+  .UserHandle {
+    padding: 1rem 0;
+  }
+
+  .Links,
+  a {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    color: #14171a;
+    line-height: 32px;
+
+    span {
+      margin-right: 0.35rem;
+      color: #657786;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #2ba5f7;
+
+    span {
+      color: #657786;
+    }
+  }
+
+
+  .Button {
+    padding: 0.6rem 1rem;
+    width: 10rem;
+    margin: 0 1rem;
+    background: #2ba5f7;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 0.85rem;
+    font-family: "Rubik", sans-serif;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+
+    &:hover {
+      background: #349ade;
+      transition: 0.2s;
+    }
+  }
+}

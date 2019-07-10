@@ -1,0 +1,22 @@
+.Button {
+    padding: 0.6rem 1rem;
+    width: 10rem;
+    margin: 0 1rem;
+    background: #2ba5f7;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 0.85rem;
+    font-family: "Rubik", sans-serif;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+
+    &:hover {
+      background: #349ade;
+      transition: 0.2s;
+    }
+  }
+
+.TextField {
+      margin: 1rem 0;
+  }

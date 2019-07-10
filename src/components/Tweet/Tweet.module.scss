@@ -1,0 +1,164 @@
+.CardContainer {
+  display: grid;
+  grid-template-areas:
+    "user timestamp"
+    "body body"
+    "delete actions";
+
+  border: 1px solid #f7f7f7;
+  padding: 1rem 2rem;
+  background: white;
+  margin: 0 1rem;
+
+  &:first-child {
+    border-bottom: none;
+    margin-top: 1rem;
+  }
+
+  .User {
+    grid-area: user;
+
+    .UserHandle {
+      font-family: "Rubik", sans-serif;
+      letter-spacing: 0.5px;
+      margin-left: 0.5rem;
+      color: #232323;
+    }
+
+    img {
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .Timestamp {
+    grid-area: timestamp;
+    color: grey;
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  .Body {
+    grid-area: body;
+    line-height: 34px;
+  }
+
+  .Actions {
+    grid-area: actions;
+    display: inline-flex;
+    justify-content: flex-end;
+
+    .Like,
+    .Comment {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+
+      span {
+        // color: #2ba5f7;
+        color: #bfbfbf;
+      }
+
+      .Count {
+        margin-left: 0.5rem;
+        color: #3a3a3a;
+      }
+
+      .LikeCount {
+        color: #3a3a3a;
+      }
+    }
+  }
+
+  .Button {
+    background: none;
+    border: none;
+  }
+}
+
+.Delete {
+  span {
+    color: #bbbbbb;
+  }
+
+  button {
+    padding: 0;
+  }
+}
+
+.DialogContainer {
+  display: grid;
+  grid-template-areas:
+    "userInfo"
+    "body"
+    "comment";
+
+  padding: 1.5rem 1rem;
+
+  .User {
+    grid-area: userInfo;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    img {
+      width: 3rem;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    h3 {
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      color: #333;
+    }
+  }
+
+  .Body {
+    grid-area: body;
+
+    .Tweet {
+      font-size: 1.3rem;
+      line-height: 32px;
+    }
+
+    .Timestamp {
+      color: #999;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .CommentContainer {
+    grid-area: comment;
+    padding: 1rem 0;
+
+    .User {
+      img {
+        width: 3rem;
+        border-radius: 50%;
+      }
+    }
+
+    .Body {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}

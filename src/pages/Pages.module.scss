@@ -1,0 +1,53 @@
+.Container {
+  height: 90vh;
+  background: white;
+
+  .Background {
+    img {
+      height: 85vh;
+    }
+  }
+
+  .LoginContainer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 3rem;
+
+    h2 {
+      font-size: 2.25rem;
+      letter-spacing: 1px;
+      text-align: left;
+      padding: 1rem 0;
+      line-height: 3.5rem;
+    }
+
+    img {
+      width: 180px;
+    }
+
+    .WrongLogin {
+        color: #f54141;
+        padding: 0.5rem 0;
+        margin: 0;
+        text-align: left;
+        font-size: 0.85rem;
+    }
+
+    .NewAccount {
+        text-align: left;
+    }
+  }
+}
+
+.Button {
+    padding: 0.6rem 13.5rem;
+    background: #2ba5f7;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 0.85rem;
+    font-family: 'Rubik', sans-serif;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+}
+
