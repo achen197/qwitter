@@ -75,15 +75,9 @@ class Navbar extends Component {
               </ul>
             </nav>
             <div className={styles.Profile}>
-              <Tooltip
-                title="Post New Tweet"
-                aria-label="Post New Tweet"
-                placement="bottom"
-              >
-                <button className={styles.Button} onClick={this.handleOpen}>
-                  Tweet
-                </button>
-              </Tooltip>
+              <button className={styles.Button} onClick={this.handleOpen}>
+                Tweet
+              </button>
               <Dialog
                 open={this.state.isOpen}
                 onClose={this.handleClose}
@@ -91,7 +85,7 @@ class Navbar extends Component {
                 fullWidth
                 maxWidth="sm"
               >
-                <DialogTitle id="form-dialog-title">New Tweet</DialogTitle>
+                <DialogTitle id="form-dialog-title">Compose a new Tweet</DialogTitle>
                 <form onSubmit={this.handleSubmit}>
                   <DialogContent>
                     <TextField
@@ -100,28 +94,26 @@ class Navbar extends Component {
                       id="body"
                       name="body"
                       type="text"
-                      label="Tweet"
+                      label="New Tweet"
                       multiline
                       fullWidth
-                      rows="2"
-                      placeholder="Vine quotes only pls"
+                      rows="4"
+                      placeholder="What's happening?"
                       error={errors.body ? true : false}
                       helperText={errors.body}
                       onChange={this.handleChange}
+                      variant="outlined"
                     />
                   </DialogContent>
-                  <DialogActions>
-                    <Button
-                      type="button"
-                      onClick={this.handleClose}
-                      color="primary"
+                  <div className={styles.Actions}>
+                    <button
+                      className={styles.Button}
+                      type="submit"
+                      disabled={!this.state.body}
                     >
-                      Cancel
-                    </Button>
-                    <Button type="submit" color="primary">
                       Tweet
-                    </Button>
-                  </DialogActions>
+                    </button>
+                  </div>
                 </form>
               </Dialog>
             </div>

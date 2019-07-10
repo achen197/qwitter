@@ -76,11 +76,6 @@
       }
     }
   }
-
-  .Button {
-    background: none;
-    border: none;
-  }
 }
 
 .Delete {
@@ -122,6 +117,12 @@
       letter-spacing: 0.5px;
       color: #333;
     }
+
+    span {
+      color: #999;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
   }
 
   .Body {
@@ -136,6 +137,33 @@
       color: #999;
       font-size: 0.85rem;
       letter-spacing: 0.5px;
+    }
+
+    .Actions {
+      grid-area: actions;
+      display: inline-flex;
+      justify-content: flex-end;
+
+      .Like,
+      .Comment {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+
+        span {
+          // color: #2ba5f7;
+          color: #bfbfbf;
+        }
+
+        .Count {
+          margin-left: 0.5rem;
+          color: #3a3a3a;
+        }
+
+        .LikeCount {
+          color: #3a3a3a;
+        }
+      }
     }
   }
 
@@ -156,9 +184,40 @@
   }
 }
 
+.CommentFormContainer {
+  margin: 1rem 0;
+  .Actions {
+    width: 100%;
+
+    .Button {
+      padding: 0.6rem 1rem;
+      width: 6rem;
+      margin-top: 0.5rem;
+      background: #2ba5f7;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 0.85rem;
+      font-family: "Rubik", sans-serif;
+      letter-spacing: 1px;
+      transition: 0.2s ease-in-out;
+
+      &:disabled {
+        background: #a4daff;
+        transition: 0.2s ease-in-out;
+      }
+    }
+  }
+}
+
 .Loading {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+}
+
+.Button {
+  background: none;
+  border: none;
 }

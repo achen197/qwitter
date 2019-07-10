@@ -8,14 +8,18 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 import styles from "./Tweet.module.scss";
-
+import {
+  likeTweet,
+  unlikeTweet,
+  deleteTweet
+} from "../../redux/actions/dataActions";
 import Tooltip from "@material-ui/core/Tooltip";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Icon from "@material-ui/core/Icon";
 import { CircularProgress } from "@material-ui/core";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 export class TweetDialog extends Component {
   state = {
@@ -31,20 +35,80 @@ export class TweetDialog extends Component {
     this.setState({ isOpen: false });
   };
 
+  likedTweet = () => {
+    if (
+      this.props.user.likes &&
+      this.props.user.likes.find(
+        like => like.tweetId === this.props.tweet.tweetId
+      )
+    )
+      return true;
+    else return false;
+  };
+
+  likeTweet = () => {
+    this.props.likeTweet(this.props.tweet.tweetId);
+  };
+
+  unlikeTweet = () => {
+    this.props.unlikeTweet(this.props.tweet.tweetId);
+  };
+
+  deleteTweet = () => {
+    this.props.deleteTweet(this.props.tweet.tweetId);
+  };
+
   render() {
     const {
       tweet: {
-        // tweetId,
+        tweetId,
         body,
         createdAt,
-        // likeCount,
-        // commentCount,
+        likeCount,
+        commentCount,
         userImage,
         userHandle,
         comments
       },
+      user: {
+        authenticated,
+        credentials: { handle }
+      },
       UI: { loading }
     } = this.props;
+
+    const likeButton = !authenticated ? (
+      <Link to="/login">
+        <Icon>favorite_border</Icon>
+      </Link>
+    ) : this.likedTweet() ? (
+      <Tooltip title="Unlike Tweet" aria-label="Unlike Tweet" placement="top">
+        <button className={styles.Button} onClick={this.unlikeTweet}>
+          <Icon>favorite</Icon>
+        </button>
+      </Tooltip>
+    ) : (
+      <Tooltip title="Like Tweet" aria-label="Like Tweet" placement="top">
+        <button className={styles.Button} onClick={this.likeTweet}>
+          <Icon>favorite_border</Icon>
+        </button>
+      </Tooltip>
+    );
+
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <div className={styles.Delete}>
+          <Tooltip
+            title="Delete Tweet"
+            aria-label="Delete Tweet"
+            placement="top"
+          >
+            <button className={styles.Button} onClick={this.deleteTweet}>
+              <Icon>delete_outline</Icon>
+            </button>
+          </Tooltip>
+        </div>
+      ) : null;
 
     const dialogMarkup = loading ? (
       <div className={styles.Loading}>
@@ -63,7 +127,12 @@ export class TweetDialog extends Component {
           <p className={styles.Timestamp}>
             {moment(createdAt).format("H:mm - D MMM YYYY")}
           </p>
-          <hr />
+          <div className={styles.Like}>
+            {likeButton}
+            <span className={styles.LikeCount}>{likeCount}</span>
+          </div>
+          <CommentForm tweetId={tweetId} />
+        <hr />
         </div>
         <Comments comments={comments} />
       </div>
@@ -84,11 +153,6 @@ export class TweetDialog extends Component {
           maxWidth="sm"
         >
           <DialogContent>{dialogMarkup}</DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Close
-            </Button>
-          </DialogActions>
         </Dialog>
       </Fragment>
     );
@@ -98,17 +162,24 @@ export class TweetDialog extends Component {
 TweetDialog.propTypes = {
   getTweet: PropTypes.func.isRequired,
   tweetId: PropTypes.string.isRequired,
-  userHandle: PropTypes.string.isRequired,
   tweet: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
+  likeTweet: PropTypes.func.isRequired,
+  unlikeTweet: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  deleteTweet: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   tweet: state.data.tweet,
+  user: state.user,
   UI: state.UI
 });
 
 const mapActionsToProps = {
+  likeTweet,
+  unlikeTweet,
+  deleteTweet,
   getTweet
 };
 

@@ -11,6 +11,10 @@ import { SET_AUTHENTICATED } from "../redux/types";
 import { logoutUser, getUserData } from "../redux/actions/userActions";
 import store from "../redux/store";
 import axios from "axios";
+import User from "./User";
+
+// axios.defaults.baseURL =
+//   'https://us-central1-qwitter-644ec.cloudfunctions.net/api';
 
 const token = localStorage.FBIdToken;
 if (token) {
@@ -21,7 +25,7 @@ if (token) {
     console.log("authenticated!!!");
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
-    axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common["Authorization"] = token;
     store.dispatch(getUserData());
   }
 }
@@ -32,16 +36,9 @@ class Routes extends Component {
       <div className="container">
         <Switch>
           <Route exact path="/" component={Home} />
-          <AuthRoute
-            exact
-            path="/login"
-            component={Login}
-          />
-          <AuthRoute
-            exact
-            path="/signup"
-            component={Signup}
-          />
+          <AuthRoute exact path="/login" component={Login} />
+          <AuthRoute exact path="/signup" component={Signup} />
+          <Route exact path="/users/:handle" component={User} />
         </Switch>
       </div>
     );

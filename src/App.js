@@ -7,15 +7,16 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Routes from "./pages/Routes";
 
+
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Provider store={store}>
+      <Provider store={store}>
+        <BrowserRouter>
           <Navbar />
           <Routes />
-        </Provider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

@@ -54,24 +54,36 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+}
 
-    .Button {
-      padding: 0.6rem 1rem;
-      width: 6rem;
-      margin: 0 1rem;
-      background: #2ba5f7;
-      border: none;
-      border-radius: 25px;
-      color: white;
-      font-size: 0.85rem;
-      font-family: "Rubik", sans-serif;
-      letter-spacing: 1px;
-  
-      &:hover {
-        background: #349ade;
-        transition: 0.2s;
-      }
+.Button {
+  padding: 0.6rem 1rem;
+  width: 6rem;
+  margin: 0 1rem;
+  background: #2ba5f7;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 0.85rem;
+  font-family: "Rubik", sans-serif;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: #349ade;
+    transition: 0.2s;
+  }
+}
+
+.Actions {
+  display: flex;
+  justify-content: flex-end;
+  .Button {
+    margin: 0rem 1.5rem 1rem 0;
+    transition: 0.2s ease-in-out;
+    &:disabled {
+      background: #a4daff;
+      transition: 0.2s ease-in-out;
     }
   }
-
 }

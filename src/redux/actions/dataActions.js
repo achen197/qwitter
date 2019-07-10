@@ -9,7 +9,8 @@ import {
   CLEAR_ERRORS,
   SET_ERRORS,
   SET_TWEET,
-  STOP_LOADING_UI
+  STOP_LOADING_UI,
+  SUBMIT_COMMENT
 } from "../types";
 import axios from "axios";
 
@@ -32,19 +33,20 @@ export const getTweets = () => dispatch => {
 };
 
 export const getTweet = tweetId => dispatch => {
-    dispatch({type: LOADING_UI });
-    axios.get(`/tweet/${tweetId}`)
+  dispatch({ type: LOADING_UI });
+  axios
+    .get(`/tweet/${tweetId}`)
     .then(res => {
-        dispatch({
-            type: SET_TWEET,
-            payload: res.data
-        })
-        dispatch({
-            type: STOP_LOADING_UI
-        })
+      dispatch({
+        type: SET_TWEET,
+        payload: res.data
+      });
+      dispatch({
+        type: STOP_LOADING_UI
+      });
     })
-    .catch(err => console.error(err))
-}
+    .catch(err => console.error(err));
+};
 
 export const postTweet = newTweet => dispatch => {
   dispatch({ type: LOADING_UI });
@@ -88,6 +90,24 @@ export const unlikeTweet = tweetId => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const submitComment = (tweetId, commentData) => dispatch => {
+  axios
+    .post(`tweet/${tweetId}/comment`, commentData)
+    .then(res => {
+      dispatch({
+        type: SUBMIT_COMMENT,
+        payload: res.data
+      });
+      dispatch(clearErrors());
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payloard: err.res.data
+      });
+    });
+};
+
 export const deleteTweet = tweetId => dispatch => {
   axios
     .delete(`/tweet/${tweetId}`)
@@ -97,6 +117,23 @@ export const deleteTweet = tweetId => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const clearErrors = () => (dispatch) => {
-    dispatch({ type: CLEAR_ERRORS });
-  };
+export const getUserData = userHandle => dispatch => {
+    dispatch({type: LOADING_DATA});
+    axios.get(`/user/${userHandle}`)
+    .then(res => {
+        dispatch({
+            type: SET_TWEETS,
+            payloard: res.data.tweets
+        })
+    })
+    .catch(() => {
+        dispatch({
+            type: SET_TWEETS,
+            payloard: null
+        })
+    })
+}
+
+export const clearErrors = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
+};

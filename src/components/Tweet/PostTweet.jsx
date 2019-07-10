@@ -17,15 +17,15 @@ export class PostTweet extends Component {
   state = {
     isOpen: false,
     body: "",
-    errors: []
+    errors: {}
   };
 
   componentWillReceiveProps(nextProps) {
-      if(nextProps.UI.errors) {
-          this.setState({
-              errors: nextProps.UI.errors
-          })
-      }
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors
+      });
+    }
   }
 
   handleOpen = () => {
@@ -66,31 +66,35 @@ export class PostTweet extends Component {
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">New Tweet</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="tweet"
-                type="text"
-                label="Tweet"
-                multiline
-                rows="2"
-                fullWidth
-                placeholder="Vine quotes only pls"
-                error={errors.body ? true : false}
-                helperText={errors.body}
-                onChange={this.handleChange}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleSubmit} color="primary">
-                Tweet
-              </Button>
-            </DialogActions>
+            <form onSubmit={this.handleSubmit}>
+              <DialogTitle id="form-dialog-title">New Tweet</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="tweet"
+                  type="text"
+                  label="Tweet"
+                  value={this.state.body}
+                  multiline
+                  rows="2"
+                  fullWidth
+                  placeholder="Vine quotes only pls"
+                  error={errors.body ? true : false}
+                  helperText={errors.body}
+                  onChange={this.handleChange}
+                />
+              </DialogContent>
+              <div className={styles.Actions}>
+                <button
+                  className={styles.Button}
+                  type="submit"
+                  disabled={!this.state.body}
+                >
+                  Tweet
+                </button>
+              </div>
+            </form>
           </Dialog>
         </div>
       </div>

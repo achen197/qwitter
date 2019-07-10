@@ -5,7 +5,8 @@ import {
   UNLIKE_TWEET,
   LOADING_DATA,
   DELETE_TWEET,
-  POST_TWEET
+  POST_TWEET,
+  SUBMIT_COMMENT
 } from "../types";
 
 const initialState = {
@@ -28,11 +29,11 @@ export default function(state = initialState, actions) {
         isLoading: false
       };
     case SET_TWEET:
-          return {
-            ...state,
-            tweet: actions.payload,
-            isLoading: false
-          };
+      return {
+        ...state,
+        tweet: actions.payload,
+        isLoading: false
+      };
     case LIKE_TWEET:
     case UNLIKE_TWEET:
       let index = state.tweets.findIndex(
@@ -57,6 +58,14 @@ export default function(state = initialState, actions) {
       return {
         ...state,
         tweets: [actions.payload, ...state.tweets]
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        tweet: {
+          ...state.tweet,
+          comments: [actions.payload, ...state.tweet.comments]
+        }
       };
     default:
       return state;
