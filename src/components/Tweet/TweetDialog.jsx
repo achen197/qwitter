@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { getTweet } from "../../redux/actions/dataActions";
 import PropTypes from "prop-types";
@@ -23,15 +22,36 @@ import CommentForm from "./CommentForm";
 
 export class TweetDialog extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    oldPath: '',
+    newPath: ''
   };
 
+  componentDidMount() {
+      if(this.props.openDialog) {
+          this.handleOpen();
+      }
+  }
+
   handleOpen = () => {
+    // let oldPath = window.location.pathname;
+
+    // const { userHandle, tweetId } = this.props;
+    // const newPath = `/users/${userHandle}/tweet/${tweetId}`;
+    
+    // if(oldPath === newPath) {
+    //     oldPath =  `/users/${userHandle}`;
+    // }
+
+    // window.history.pushState(null, null, newPath);
+
+    // this.setState({ isOpen: true, oldPath, newPath });
     this.setState({ isOpen: true });
     this.props.getTweet(this.props.tweetId);
   };
 
   handleClose = () => {
+    // window.history.pushState(null, null, this.state.oldPath);
     this.setState({ isOpen: false });
   };
 
@@ -130,6 +150,8 @@ export class TweetDialog extends Component {
           <div className={styles.Like}>
             {likeButton}
             <span className={styles.LikeCount}>{likeCount}</span>
+            {deleteButton}
+            <span className={styles.LikeCount}>{commentCount}</span>
           </div>
           <CommentForm tweetId={tweetId} />
         <hr />

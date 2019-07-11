@@ -4,7 +4,8 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   SET_ERRORS,
-  LOADING_USER
+  LOADING_USER,
+  MARK_NOTIFICATIONS_READ
 } from "../types";
 import axios from "axios";
 
@@ -79,6 +80,16 @@ export const updateUserDetails = userDetails => dispatch => {
     })
     .catch(err => console.log(err));
 };
+
+export const markNotificatiosnAsRead = notificationId => dispatch => {
+  axios.post("/notifications", notificationId)
+    .then(res => {
+      dispatch({
+        type: MARK_NOTIFICATIONS_READ,
+      })
+    })
+    .catch(err => console.log(err));
+}
 
 const setAuthHeader = token => {
   const FBIdToken = `Bearer ${token}`;

@@ -12,26 +12,24 @@ h1, h2, h3, h4, h5 {
 .container {
   background:#e6ecf0;
   height: 100%;
-  padding: 4rem 0;
+  margin-top: 3.5rem;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 5px;
   border-radius: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1; 
+  border-radius: 20px;
 }
  
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #c3c3c3; 
+  border-radius: 20px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #777; 
+  background: #e8e8e8; 
 }

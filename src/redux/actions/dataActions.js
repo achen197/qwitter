@@ -6,7 +6,6 @@ import {
   DELETE_TWEET,
   LOADING_UI,
   POST_TWEET,
-  CLEAR_ERRORS,
   SET_ERRORS,
   SET_TWEET,
   STOP_LOADING_UI,
@@ -57,7 +56,6 @@ export const postTweet = newTweet => dispatch => {
         type: POST_TWEET,
         payload: res.data
       });
-      dispatch(clearErrors());
     })
     .catch(err => {
       dispatch({
@@ -98,12 +96,11 @@ export const submitComment = (tweetId, commentData) => dispatch => {
         type: SUBMIT_COMMENT,
         payload: res.data
       });
-      dispatch(clearErrors());
     })
     .catch(err => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.res.data
+        payload: err.response.data
       });
     });
 };
@@ -133,7 +130,3 @@ export const getUserData = userHandle => dispatch => {
         })
     })
 }
-
-export const clearErrors = () => dispatch => {
-  dispatch({ type: CLEAR_ERRORS });
-};

@@ -106,7 +106,7 @@ class Tweet extends Component {
             <span className={styles.LikeCount}>{likeCount}</span>
           </div>
           <div className={styles.Comment}>
-            <TweetDialog tweetId={tweetId} userHandle={userHandle}></TweetDialog>
+            <TweetDialog tweetId={tweetId} userHandle={userHandle} openDialog={this.props.openDialog} />
             <span className={styles.Count}>{commentCount}</span>
           </div>
         </div>
@@ -121,7 +121,8 @@ Tweet.propTypes = {
   user: PropTypes.object.isRequired,
   tweet: PropTypes.object.isRequired,
   deleteTweet: PropTypes.func.isRequired,
-  tweetId: PropTypes.string.isRequired
+  tweetId: PropTypes.string,
+  openDialog: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

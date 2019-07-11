@@ -5,15 +5,13 @@ import PropTypes from "prop-types";
 import logo from "../../static/images/logo.png";
 import styles from "./Navbar.module.scss";
 import Icon from "@material-ui/core/Icon";
-import { postTweet, clearErrors } from "../../redux/actions/dataActions";
+import { postTweet } from "../../redux/actions/dataActions";
 
-import Tooltip from "@material-ui/core/Tooltip";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
+import Notifications from "../Tweet/Actions/Notifications"
 
 class Navbar extends Component {
   state = {
@@ -38,7 +36,6 @@ class Navbar extends Component {
   };
 
   handleClose = () => {
-    this.props.clearErrors();
     this.setState({ isOpen: false, errors: {} });
   };
 
@@ -64,12 +61,12 @@ class Navbar extends Component {
               <ul>
                 <Link to="/">
                   <li>
-                    <Icon>home</Icon> Home
+                    <Icon>home</Icon>
                   </li>
                 </Link>
                 <Link to="/">
                   <li>
-                    <Icon>notifications</Icon> Notifications
+                    <Notifications />                     
                   </li>
                 </Link>
               </ul>
@@ -131,7 +128,6 @@ class Navbar extends Component {
 Navbar.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   postTweet: PropTypes.func.isRequired,
-  clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired
 };
 
@@ -141,8 +137,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  postTweet,
-  clearErrors
+  postTweet
 };
 
 export default connect(

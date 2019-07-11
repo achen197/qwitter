@@ -33,7 +33,7 @@ class Signup extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.setState({
-      isLoading: true
+      loading: true
     });
     const newUserData = {
       email: this.state.email,

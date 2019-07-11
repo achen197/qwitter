@@ -15,6 +15,10 @@
     margin-top: 1rem;
   }
 
+  &:last-child {
+    margin-bottom: 3rem;
+  }
+
   .User {
     grid-area: user;
 

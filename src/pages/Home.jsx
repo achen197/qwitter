@@ -8,14 +8,13 @@ import { connect } from "react-redux";
 import { getTweets } from "../redux/actions/dataActions";
 
 class Home extends Component {
-
   componentDidMount() {
     this.props.getTweets();
   }
 
   render() {
-    const {tweets, isLoading } = this.props.data;
-    let tweetMarkup = !isLoading ? (
+    const { tweets, loading } = this.props.data;
+    let tweetMarkup = !loading ? (
       tweets.map(tweet => <Tweet key={tweet.tweetId} tweet={tweet} />)
     ) : (
       <p>Loading...</p>
@@ -38,8 +37,8 @@ class Home extends Component {
 
 Home.propTypes = {
   getTweets: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired,
-}
+  data: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   data: state.data

@@ -5,6 +5,7 @@ import {
   LOADING_USER,
   LIKE_TWEET,
   UNLIKE_TWEET,
+  MARK_NOTIFICATIONS_READ,
   // MARK_NOTIFICATIONS_READ
 } from '../types';
 
@@ -54,11 +55,11 @@ export default function(state = initialState, action) {
           (like) => like.tweetId !== action.payload.tweetId
         )
       };
-    // case MARK_NOTIFICATIONS_READ:
-    //   state.notifications.forEach((not) => (not.read = true));
-    //   return {
-    //     ...state
-    //   };
+    case MARK_NOTIFICATIONS_READ:
+      state.notifications.forEach((not) => (not.read = true));
+      return {
+        ...state
+      };
     default:
       return state;
   }

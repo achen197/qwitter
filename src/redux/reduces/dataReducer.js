@@ -12,7 +12,7 @@ import {
 const initialState = {
   tweets: [],
   tweet: {},
-  isLoading: false
+  loading: false
 };
 
 export default function(state = initialState, actions) {
@@ -20,19 +20,19 @@ export default function(state = initialState, actions) {
     case LOADING_DATA:
       return {
         ...state,
-        isLoading: true
+        loading: true
       };
     case SET_TWEETS:
       return {
         ...state,
         tweets: actions.payload,
-        isLoading: false
+        loading: false
       };
     case SET_TWEET:
       return {
         ...state,
         tweet: actions.payload,
-        isLoading: false
+        loading: false
       };
     case LIKE_TWEET:
     case UNLIKE_TWEET:
