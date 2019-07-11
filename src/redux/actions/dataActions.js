@@ -103,7 +103,7 @@ export const submitComment = (tweetId, commentData) => dispatch => {
     .catch(err => {
       dispatch({
         type: SET_ERRORS,
-        payloard: err.res.data
+        payload: err.res.data
       });
     });
 };
@@ -123,13 +123,13 @@ export const getUserData = userHandle => dispatch => {
     .then(res => {
         dispatch({
             type: SET_TWEETS,
-            payloard: res.data.tweets
+            payload: res.data.tweets
         })
     })
     .catch(() => {
         dispatch({
             type: SET_TWEETS,
-            payloard: null
+            payload: null
         })
     })
 }
