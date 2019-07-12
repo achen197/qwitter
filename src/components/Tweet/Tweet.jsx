@@ -2,22 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import moment from "moment";
-import Icon from "@material-ui/core/Icon";
-import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./Tweet.module.scss";
 import { connect } from "react-redux";
-import {
-  likeTweet,
-  unlikeTweet,
-  deleteTweet
-} from "../../redux/actions/dataActions";
 import TweetDialog from "./TweetDialog";
 import LikeButton from "./Actions/LikeButton";
+import DeleteButton from "./Actions/DeleteButton";
 
 class Tweet extends Component {
-  deleteTweet = () => {
-    this.props.deleteTweet(this.props.tweet.tweetId);
-  };
 
   render() {
     const {
@@ -38,17 +29,7 @@ class Tweet extends Component {
 
     const deleteButton =
       authenticated && userHandle === handle ? (
-        <div className={styles.Delete}>
-          <Tooltip
-            title="Delete Tweet"
-            aria-label="Delete Tweet"
-            placement="top"
-          >
-            <button className={styles.Button} onClick={this.deleteTweet}>
-              <Icon>delete_outline</Icon>
-            </button>
-          </Tooltip>
-        </div>
+        <DeleteButton tweetId={tweetId} />
       ) : null;
 
     return (
@@ -70,7 +51,11 @@ class Tweet extends Component {
             <span className={styles.LikeCount}>{likeCount}</span>
           </div>
           <div className={styles.Comment}>
-            <TweetDialog tweetId={tweetId} userHandle={userHandle} openDialog={this.props.openDialog} />
+            <TweetDialog
+              tweetId={tweetId}
+              userHandle={userHandle}
+              openDialog={this.props.openDialog}
+            />
             <span className={styles.Count}>{commentCount}</span>
           </div>
         </div>
@@ -80,11 +65,10 @@ class Tweet extends Component {
 }
 
 Tweet.propTypes = {
-  likeTweet: PropTypes.func.isRequired,
-  unlikeTweet: PropTypes.func.isRequired,
+  // likeTweet: PropTypes.func.isRequired,
+  // unlikeTweet: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   tweet: PropTypes.object.isRequired,
-  deleteTweet: PropTypes.func.isRequired,
   tweetId: PropTypes.string,
   openDialog: PropTypes.bool
 };
@@ -93,13 +77,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-const mapActionsToProps = {
-  likeTweet,
-  unlikeTweet,
-  deleteTweet
-};
-
 export default connect(
-  mapStateToProps,
-  mapActionsToProps
+  mapStateToProps
 )(Tweet);
