@@ -119,6 +119,7 @@ class TweetDialog extends Component {
 
 TweetDialog.propTypes = {
   getTweet: PropTypes.func.isRequired,
+  userHandle: PropTypes.string.isRequired,
   tweetId: PropTypes.string.isRequired,
   tweet: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,

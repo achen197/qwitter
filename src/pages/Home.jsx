@@ -27,9 +27,6 @@ class Home extends Component {
         <Grid item md={6} sm={12}>
           <div>{tweetMarkup}</div>
         </Grid>
-        <Grid item md={3} sm={12}>
-          <h2>news</h2>
-        </Grid>
       </Grid>
     );
   }
