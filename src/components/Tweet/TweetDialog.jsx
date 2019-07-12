@@ -34,24 +34,11 @@ export class TweetDialog extends Component {
   }
 
   handleOpen = () => {
-    // let oldPath = window.location.pathname;
-
-    // const { userHandle, tweetId } = this.props;
-    // const newPath = `/users/${userHandle}/tweet/${tweetId}`;
-    
-    // if(oldPath === newPath) {
-    //     oldPath =  `/users/${userHandle}`;
-    // }
-
-    // window.history.pushState(null, null, newPath);
-
-    // this.setState({ isOpen: true, oldPath, newPath });
     this.setState({ isOpen: true });
     this.props.getTweet(this.props.tweetId);
   };
 
   handleClose = () => {
-    // window.history.pushState(null, null, this.state.oldPath);
     this.setState({ isOpen: false });
   };
 
