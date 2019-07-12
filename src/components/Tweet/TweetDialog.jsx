@@ -19,18 +19,17 @@ import Icon from "@material-ui/core/Icon";
 import { CircularProgress } from "@material-ui/core";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
+import LikeButton from "./Actions/LikeButton";
 
 export class TweetDialog extends Component {
   state = {
-    isOpen: false,
-    oldPath: '',
-    newPath: ''
+    isOpen: false
   };
 
   componentDidMount() {
-      if(this.props.openDialog) {
-          this.handleOpen();
-      }
+    if (this.props.openDialog) {
+      this.handleOpen();
+    }
   }
 
   handleOpen = () => {
@@ -42,24 +41,24 @@ export class TweetDialog extends Component {
     this.setState({ isOpen: false });
   };
 
-  likedTweet = () => {
-    if (
-      this.props.user.likes &&
-      this.props.user.likes.find(
-        like => like.tweetId === this.props.tweet.tweetId
-      )
-    )
-      return true;
-    else return false;
-  };
+  //   likedTweet = () => {
+  //     if (
+  //       this.props.user.likes &&
+  //       this.props.user.likes.find(
+  //         like => like.tweetId === this.props.tweet.tweetId
+  //       )
+  //     )
+  //       return true;
+  //     else return false;
+  //   };
 
-  likeTweet = () => {
-    this.props.likeTweet(this.props.tweet.tweetId);
-  };
+  //   likeTweet = () => {
+  //     this.props.likeTweet(this.props.tweet.tweetId);
+  //   };
 
-  unlikeTweet = () => {
-    this.props.unlikeTweet(this.props.tweet.tweetId);
-  };
+  //   unlikeTweet = () => {
+  //     this.props.unlikeTweet(this.props.tweet.tweetId);
+  //   };
 
   deleteTweet = () => {
     this.props.deleteTweet(this.props.tweet.tweetId);
@@ -84,23 +83,23 @@ export class TweetDialog extends Component {
       UI: { loading }
     } = this.props;
 
-    const likeButton = !authenticated ? (
-      <Link to="/login">
-        <Icon>favorite_border</Icon>
-      </Link>
-    ) : this.likedTweet() ? (
-      <Tooltip title="Unlike Tweet" aria-label="Unlike Tweet" placement="top">
-        <button className={styles.Button} onClick={this.unlikeTweet}>
-          <Icon>favorite</Icon>
-        </button>
-      </Tooltip>
-    ) : (
-      <Tooltip title="Like Tweet" aria-label="Like Tweet" placement="top">
-        <button className={styles.Button} onClick={this.likeTweet}>
-          <Icon>favorite_border</Icon>
-        </button>
-      </Tooltip>
-    );
+    // const likeButton = !authenticated ? (
+    //   <Link to="/login">
+    //     <Icon>favorite_border</Icon>
+    //   </Link>
+    // ) : this.likedTweet() ? (
+    //   <Tooltip title="Unlike Tweet" aria-label="Unlike Tweet" placement="top">
+    //     <button className={styles.Button} onClick={this.unlikeTweet}>
+    //       <Icon>favorite</Icon>
+    //     </button>
+    //   </Tooltip>
+    // ) : (
+    //   <Tooltip title="Like Tweet" aria-label="Like Tweet" placement="top">
+    //     <button className={styles.Button} onClick={this.likeTweet}>
+    //       <Icon>favorite_border</Icon>
+    //     </button>
+    //   </Tooltip>
+    // );
 
     const deleteButton =
       authenticated && userHandle === handle ? (
@@ -134,14 +133,20 @@ export class TweetDialog extends Component {
           <p className={styles.Timestamp}>
             {moment(createdAt).format("H:mm - D MMM YYYY")}
           </p>
-          <div className={styles.Like}>
-            {likeButton}
-            <span className={styles.LikeCount}>{likeCount}</span>
+          <div className={styles.Actions}>
+            <div className={styles.Like}>
+              {/* {likeButton} */}
+              <LikeButton tweetId={tweetId} />
+              <span className={styles.LikeCount}>{likeCount}</span>
+            </div>
+            <div className={styles.Comment}>
+              <Icon>comment</Icon>
+              <span className={styles.LikeCount}>{commentCount}</span>
+            </div>
             {deleteButton}
-            <span className={styles.LikeCount}>{commentCount}</span>
           </div>
           <CommentForm tweetId={tweetId} />
-        <hr />
+          <hr />
         </div>
         <Comments comments={comments} />
       </div>

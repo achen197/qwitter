@@ -7,7 +7,7 @@ import styles from "./Actions.module.scss";
 import { connect } from "react-redux";
 import { likeTweet, unlikeTweet } from "../../../redux/actions/dataActions";
 
-export class LikeButton extends Component {
+class LikeButton extends Component {
   likedTweet = () => {
     if (
       this.props.user.likes &&
@@ -49,10 +49,10 @@ export class LikeButton extends Component {
 }
 
 LikeButton.propTypes = {
-  user: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
   tweetId: PropTypes.string.isRequired,
-//   likeTweet: PropTypes.func.isRequired,
-//   unlikeTweet: PropTypes.func.isRequired
+  likeTweet: PropTypes.func.isRequired,
+  unlikeTweet: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -66,7 +66,6 @@
       margin-left: 0.5rem;
 
       span {
-        // color: #2ba5f7;
         color: #bfbfbf;
       }
 
@@ -147,26 +146,36 @@
       grid-area: actions;
       display: inline-flex;
       justify-content: flex-end;
+      width: 100%;
 
       .Like,
       .Comment {
         display: flex;
         align-items: center;
-        margin-left: 0.5rem;
 
         span {
-          // color: #2ba5f7;
           color: #bfbfbf;
         }
 
         .Count {
-          margin-left: 0.5rem;
           color: #3a3a3a;
         }
 
         .LikeCount {
           color: #3a3a3a;
         }
+      }
+
+      .Comment {
+        margin: 0 0.5rem;
+
+        span {
+          margin-right: 0.5rem;
+        }
+      }
+
+      .Delete {
+        margin-left: auto;
       }
     }
   }

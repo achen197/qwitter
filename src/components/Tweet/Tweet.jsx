@@ -12,27 +12,9 @@ import {
   deleteTweet
 } from "../../redux/actions/dataActions";
 import TweetDialog from "./TweetDialog";
+import LikeButton from "./Actions/LikeButton";
 
 class Tweet extends Component {
-  likedTweet = () => {
-    if (
-      this.props.user.likes &&
-      this.props.user.likes.find(
-        like => like.tweetId === this.props.tweet.tweetId
-      )
-    )
-      return true;
-    else return false;
-  };
-
-  likeTweet = () => {
-    this.props.likeTweet(this.props.tweet.tweetId);
-  };
-
-  unlikeTweet = () => {
-    this.props.unlikeTweet(this.props.tweet.tweetId);
-  };
-
   deleteTweet = () => {
     this.props.deleteTweet(this.props.tweet.tweetId);
   };
@@ -53,24 +35,6 @@ class Tweet extends Component {
         credentials: { handle }
       }
     } = this.props;
-
-    const likeButton = !authenticated ? (
-      <Link to="/login">
-        <Icon>favorite_border</Icon>
-      </Link>
-    ) : this.likedTweet() ? (
-      <Tooltip title="Unlike Tweet" aria-label="Unlike Tweet" placement="top">
-        <button className={styles.Button} onClick={this.unlikeTweet}>
-          <Icon>favorite</Icon>
-        </button>
-      </Tooltip>
-    ) : (
-      <Tooltip title="Like Tweet" aria-label="Like Tweet" placement="top">
-        <button className={styles.Button} onClick={this.likeTweet}>
-          <Icon>favorite_border</Icon>
-        </button>
-      </Tooltip>
-    );
 
     const deleteButton =
       authenticated && userHandle === handle ? (
@@ -102,7 +66,7 @@ class Tweet extends Component {
         <div className={styles.Delete}>{deleteButton}</div>
         <div className={styles.Actions}>
           <div className={styles.Like}>
-            {likeButton}
+            <LikeButton tweetId={tweetId} />
             <span className={styles.LikeCount}>{likeCount}</span>
           </div>
           <div className={styles.Comment}>
