@@ -9,7 +9,8 @@ import {
   SET_ERRORS,
   SET_TWEET,
   STOP_LOADING_UI,
-  SUBMIT_COMMENT
+  SUBMIT_COMMENT,
+  CLEAR_ERRORS
 } from "../types";
 import axios from "axios";
 
@@ -56,6 +57,7 @@ export const postTweet = newTweet => dispatch => {
         type: POST_TWEET,
         payload: res.data
       });
+      dispatch(clearErrors());
     })
     .catch(err => {
       dispatch({
@@ -96,6 +98,7 @@ export const submitComment = (tweetId, commentData) => dispatch => {
         type: SUBMIT_COMMENT,
         payload: res.data
       });
+      dispatch(clearErrors());
     })
     .catch(err => {
       dispatch({
@@ -130,3 +133,8 @@ export const getUserData = userHandle => dispatch => {
         })
     })
 }
+
+export const clearErrors = () => dispatch => {
+    dispatch({ type: CLEAR_ERRORS });
+  };
+  
