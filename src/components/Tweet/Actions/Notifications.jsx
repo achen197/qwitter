@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./Actions.module.scss";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -16,18 +17,18 @@ class Notifications extends Component {
   };
 
   handleOpen = event => {
-    this.setState({ achorEl: event.target });
+    this.setState({ anchorEl: event.target });
   };
 
   handleClose = () => {
-    this.setState({ achorEl: null });
+    this.setState({ anchorEl: null });
   };
 
   onMenuOpen = () => {
     let unreadNotificationsIds = this.props.notifications
       .filter(not => !not.read)
       .map(not => not.notificationId);
-    this.props.markNotificationsRead(unreadNotificationsIds);
+    this.props.markNotificatiosnAsRead(unreadNotificationsIds);
   };
 
   render() {
@@ -60,22 +61,27 @@ class Notifications extends Component {
           const iconColor = not.read ? "primary" : "secondary";
           const icon =
             not.type === "like" ? (
-              <Icon color={iconColor}>favourite</Icon>
+              <Icon color={iconColor}>favorite</Icon>
             ) : (
               <Icon color={iconColor}>comment</Icon>
             );
           return (
-            <MenuItem key={not.createdAt} onClick={this.handleClose}>
-              {icon}
-              <Link to={`/users/${not.recipient}/tweet/${not.tweetId}`}>
-                {not.sender} {verb} your tweet {time}
-              </Link>
-            </MenuItem>
+            <Link to={`/users/${not.recipient}/tweet/${not.tweetId}`}  key={not.createdAt}>
+              <MenuItem onClick={this.handleClose}>
+                {icon}
+                <div className={styles.Notifications}>
+                  <p>
+                    {not.sender} {verb} your tweet
+                    <span className={styles.Timestamp}>{time}</span>
+                  </p>
+                </div>
+              </MenuItem>
+            </Link>
           );
         })
       ) : (
         <MenuItem onClick={this.handleClose}>
-          You have no notifications yet
+          You have no notifications
         </MenuItem>
       );
     return (
@@ -89,11 +95,12 @@ class Notifications extends Component {
         </Button>
         <Menu
           id="simple-menu"
+          getContentAnchorEl={null}
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
-          onEntered={this.onMenuOpened}
+          onEntered={this.onMenuOpen}
         >
           {notificationsMarkup}
         </Menu>
